@@ -1,0 +1,27 @@
+{
+  "name": "ddmath-backend",
+  "version": "0.0.0",
+  "private": true,
+  "author": "Donghyuk Choi <gohyuk528@gmail.com>",
+  "description": "math education app for children in the world",
+  "scripts": {
+    "start": "node ./bin/www",
+    "dev": " nodemon ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "dotenv": "^10.0.0",
+    "express": "~4.16.1",
+    "firebase-admin": "^9.7.0",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.10",
+    "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0"
+  }
+}
