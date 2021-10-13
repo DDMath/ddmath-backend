@@ -15,7 +15,7 @@ exports.login = async function (req, res, next) {
         message: "login success",
         data: {
           accessToken: jwt.sign({ id: currentUser._id }, process.env.JWT_SECRET, {
-            expiresIn: "6H",
+            expiresIn: "7D",
           }),
           user: currentUser,
         },
