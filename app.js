@@ -7,11 +7,19 @@ const app = express();
 
 const initLoader = require("./loaders");
 const connectMongoDB = require("./loaders/db");
+const connectFirebaseAdmin = require("./loaders/firebaseAdmin");
+
+const index = require("./routes/index");
 
 initLoader(app);
 connectMongoDB();
+connectFirebaseAdmin();
 
-app.use(require("./routes"));
+app.get("/", (req, res) => {
+  res.status(200).json({ result: "success" });
+});
+
+app.use("/api", index);
 
 app.use(function (req, res, next) {
   next(createError(404));
