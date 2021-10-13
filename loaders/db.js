@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 
-const connectMongoDB = () => {
+function connectMongoDB() {
   const db = mongoose.connection;
+
   db.on("error", console.error);
   db.once("open", () => console.log("Connected to mongoDB server"));
 
@@ -10,6 +11,6 @@ const connectMongoDB = () => {
     useUnifiedTopology: true,
     dbName: process.env.MONGODB_NAME,
   });
-};
+}
 
 module.exports = connectMongoDB;
