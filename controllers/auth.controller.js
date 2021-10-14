@@ -1,12 +1,11 @@
 const jwt = require("jsonwebtoken");
-const admin = require("firebase-admin");
 const createError = require("http-errors");
 
 const User = require("../models/User");
 
 exports.login = async function (req, res, next) {
   try {
-    const { email, name, picture } = await admin.auth().verifyIdToken(req.body.id_token);
+    const { email, name } = req.body;
     const currentUser = await User.findOne({ email });
 
     if (currentUser) {
@@ -24,7 +23,6 @@ exports.login = async function (req, res, next) {
       const newUser = await User.create({
         email,
         name,
-        picture,
       });
 
       res.json({
