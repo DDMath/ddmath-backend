@@ -23,10 +23,10 @@ exports.getUserData = async function (req, res, next) {
 
 exports.updateFinalStageRecord = async function (req, res, next) {
   try {
-    const { lastStage } = req.body;
+    const { game } = req.body;
     let stage = 0;
 
-    switch (lastStage) {
+    switch (game) {
       case "puzzle-game":
         stage = 1;
         break;
@@ -43,9 +43,14 @@ exports.updateFinalStageRecord = async function (req, res, next) {
     const user = await User.findOne({ _id: req.userId });
 
     if (user.lastStage < stage) {
-      await User.findOneAndUpdate(req.userId, {
-        lastStage: stage,
-      });
+      await User.findOneAndUpdate(
+        { _id: req.userId },
+        {
+          $set: {
+            lastStage: stage,
+          },
+        }
+      );
     }
 
     res.json({ code: 200, message: "update success" });
