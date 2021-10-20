@@ -1,6 +1,7 @@
 const createError = require("http-errors");
 
 const User = require("../models/User");
+const { gameType, message } = require("../constants");
 
 exports.getUserData = async function (req, res, next) {
   try {
@@ -13,7 +14,7 @@ exports.getUserData = async function (req, res, next) {
 
     res.status(200).json({
       code: 200,
-      message: "login success",
+      message: message.SUCCESS,
       data: { user: currentUser },
     });
   } catch (err) {
@@ -27,13 +28,13 @@ exports.updateFinalStageRecord = async function (req, res, next) {
     let stage = 0;
 
     switch (game) {
-      case "puzzle-game":
+      case gameType.SHOOTING_GAME:
         stage = 1;
         break;
-      case "link-game":
+      case gameType.PUZZLE_GAME:
         stage = 2;
         break;
-      case "shooting-game":
+      case gameType.MATCHING_GAME:
         stage = 3;
         break;
       default:
@@ -53,7 +54,7 @@ exports.updateFinalStageRecord = async function (req, res, next) {
       );
     }
 
-    res.json({ code: 200, message: "update success" });
+    res.json({ code: 200, message: message.SUCCESS });
   } catch (err) {
     next(createError(500, err));
   }

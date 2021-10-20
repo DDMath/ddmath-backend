@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const createError = require("http-errors");
 
 const User = require("../models/User");
+const { message, expiration } = require("../constants");
 
 exports.login = async function (req, res, next) {
   try {
@@ -11,10 +12,10 @@ exports.login = async function (req, res, next) {
     if (currentUser) {
       res.json({
         code: 200,
-        message: "login success",
+        message: message.SUCCESS,
         data: {
           accessToken: jwt.sign({ id: currentUser._id }, process.env.JWT_SECRET, {
-            expiresIn: "7D",
+            expiresIn: expiration.ONE_WEEK,
           }),
           user: currentUser,
         },
@@ -27,10 +28,10 @@ exports.login = async function (req, res, next) {
 
       res.json({
         code: 200,
-        message: "login success",
+        message: message.SUCCESS,
         data: {
           accessToken: jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
-            expiresIn: "6H",
+            expiresIn: expiration.ONE_WEEK,
           }),
           user: newUser,
         },
